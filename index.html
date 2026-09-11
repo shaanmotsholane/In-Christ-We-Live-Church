@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>In Christ We Live Ministries</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Barlow:ital,wght@0,300;0,600;0,700;0,800;0,900;1,300;1,700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#111111;
+  --off-black:#1C1C1C;
+  --dark-grey:#444444;
+  --mid-grey:#888888;
+  --light-grey:#CCCCCC;
+  --border:#E8E8E8;
+  --bg:#FFFFFF;
+  --bg-soft:#F7F7F7;
+  --purple:#3D1278;
+  --purple-light:#F3EEFF;
+  --gold:#C9920A;
+  --gold-bright:#F0B429;
+  --gold-pale:#FFF8E1;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--black);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%}
+ 
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,0.97);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;height:64px;
+  gap:1rem;
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.nav-logo-icon{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--purple);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;flex-shrink:0;
+  font-size:15px;color:#fff;font-weight:700;font-family:'Barlow',sans-serif;
+}
+.nav-logo-icon img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.nav-logo-name{
+  font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;
+  color:var(--black);letter-spacing:0.01em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  font-size:13px;font-weight:500;color:var(--dark-grey);
+  text-decoration:none;letter-spacing:0.02em;transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--black)}
+.nav-cta{
+  font-size:13px;font-weight:600;color:var(--bg);
+  background:var(--black);
+  border:none;padding:9px 20px;border-radius:3px;
+  text-decoration:none;cursor:pointer;letter-spacing:0.03em;
+  transition:background 0.2s;flex-shrink:0;white-space:nowrap;
+}
+.nav-cta:hover{background:var(--purple)}
+ 
+/* HERO */
+.hero{
+  background:var(--off-black);
+  min-height:90vh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 2.5rem 5rem;
+  position:relative;overflow:hidden;
+}
+.hero-slideshow{
+  position:absolute;inset:0;z-index:0;
+}
+.hero-slide{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  transition:opacity 1.8s ease-in-out;
+}
+.hero-slide.is-active{opacity:1}
+.hero-slideshow-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(17,17,17,0.55) 0%,rgba(17,17,17,0.55) 40%,rgba(17,17,17,0.88) 100%);
+  z-index:1;
+}
+.hero-content{position:relative;z-index:2;max-width:720px}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--gold-bright);margin-bottom:1.8rem;
+}
+.hero-pill-dot{width:5px;height:5px;border-radius:50%;background:var(--gold-bright)}
+.hero h1{
+  font-family:'Barlow',sans-serif;font-weight:900;font-style:italic;
+  font-size:clamp(52px,9vw,100px);
+  color:#fff;line-height:0.92;letter-spacing:-0.02em;
+  margin-bottom:2rem;
+  word-break:break-word;
+}
+.hero h1 em{font-style:normal;color:var(--gold-bright)}
+.hero-sub{
+  font-size:16px;font-weight:300;color:rgba(255,255,255,0.6);
+  max-width:440px;line-height:1.7;margin-bottom:2.5rem;
+}
+.hero-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.btn-white{
+  background:#fff;color:var(--black);
+  padding:13px 28px;border-radius:3px;
+  font-size:13px;font-weight:600;text-decoration:none;
+  letter-spacing:0.04em;text-transform:uppercase;
+  transition:background 0.2s,color 0.2s;
+  display:inline-block;
+}
+.btn-white:hover{background:var(--gold-bright);color:var(--black)}
+.btn-text{
+  font-size:13px;font-weight:500;color:rgba(255,255,255,0.6);
+  text-decoration:none;letter-spacing:0.02em;
+  display:flex;align-items:center;gap:6px;
+  transition:color 0.2s;
+}
+.btn-text:hover{color:#fff}
+.hero-verse{
+  position:absolute;bottom:2rem;right:2.5rem;
+  z-index:2;
+  font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.06em;
+  font-style:italic;max-width:260px;text-align:right;
+}
+.hero-slide-dots{
+  position:absolute;bottom:2rem;left:2.5rem;
+  z-index:2;
+  display:flex;gap:8px;
+}
+.hero-slide-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:rgba(255,255,255,0.3);
+  border:none;padding:0;cursor:pointer;
+  transition:background 0.2s,transform 0.2s;
+}
+.hero-slide-dot.is-active{background:var(--gold-bright);transform:scale(1.25)}
+ 
+/* SERVICE BAR */
+.service-bar{
+  background:var(--purple);
+  display:flex;align-items:center;justify-content:center;
+  gap:3rem;padding:1.1rem 2.5rem;flex-wrap:wrap;
+}
+.service-bar-item{
+  display:flex;align-items:center;gap:10px;
+  font-size:13px;font-weight:500;color:rgba(255,255,255,0.9);
+  letter-spacing:0.02em;text-align:center;
+}
+.service-bar-dot{width:4px;height:4px;border-radius:50%;background:var(--gold-bright);flex-shrink:0}
+ 
+/* SECTION COMMONS */
+section{padding:90px 2.5rem}
+.inner{max-width:1080px;margin:0 auto}
+.eyebrow{
+  font-size:11px;font-weight:600;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--gold);
+  margin-bottom:1rem;display:block;
+}
+.section-h{
+  font-family:'Barlow',sans-serif;font-weight:800;
+  font-size:clamp(32px,5vw,52px);color:var(--black);
+  line-height:1.05;letter-spacing:-0.02em;margin-bottom:1.2rem;
+}
+.section-body{
+  font-size:16px;font-weight:300;color:var(--dark-grey);
+  max-width:500px;line-height:1.75;margin-bottom:2.5rem;
+}
+.link-arrow{
+  font-size:13px;font-weight:600;color:var(--black);
+  text-decoration:none;letter-spacing:0.04em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:8px;
+  border-bottom:1.5px solid var(--black);padding-bottom:2px;
+  transition:color 0.2s,border-color 0.2s;
+}
+.link-arrow:hover{color:var(--purple);border-color:var(--purple)}
+ 
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.about-visual{
+  background:var(--off-black) url('image/Ps-MK.jpg') center/cover no-repeat;
+  border-radius:4px;
+  aspect-ratio:3/4;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;position:relative;overflow:hidden;
+  padding:3rem 2rem;
+}
+.about-visual-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(17,17,17,0.35) 0%,rgba(17,17,17,0.45) 50%,rgba(17,17,17,0.82) 100%);
+  z-index:0;
+}
+.about-visual-content{position:relative;z-index:1;text-align:center}
+.about-visual-tag{
+  font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--gold-bright);margin-bottom:1.5rem;display:block;
+}
+.about-visual-quote{
+  font-family:'Barlow',sans-serif;font-weight:700;font-style:italic;
+  font-size:24px;color:#fff;line-height:1.3;margin-bottom:1rem;
+}
+.about-visual-cite{font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:0.06em}
+.about-stat-row{display:flex;gap:2rem;margin-top:2.5rem;flex-wrap:wrap}
+.stat{border-top:2px solid var(--gold);padding-top:1rem}
+.stat-num{font-family:'Barlow',sans-serif;font-weight:900;font-size:42px;color:var(--black);line-height:1}
+.stat-label{font-size:12px;color:var(--mid-grey);margin-top:4px;font-weight:500;letter-spacing:0.04em}
+ 
+/* SERMONS */
+.sermons-bg{background:var(--bg-soft)}
+.sermons-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem}
+.sermon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border)}
+.sermon-card{
+  background:var(--bg);padding:1.25rem;
+  display:flex;flex-direction:column;gap:1rem;
+  cursor:pointer;transition:background 0.2s;
+}
+.sermon-card:hover{background:var(--purple-light)}
+.sermon-thumbnail{
+  position:relative;display:block;overflow:hidden;border-radius:10px;
+  min-height:170px;background:linear-gradient(135deg,var(--purple),var(--gold));
+}
+.sermon-thumbnail img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform 0.3s ease;
+}
+.sermon-thumbnail:hover img{transform:scale(1.04)}
+.sermon-thumb-label{
+  position:absolute;left:0.8rem;bottom:0.8rem;
+  background:rgba(17,17,17,0.82);color:#fff;
+  padding:0.45rem 0.7rem;border-radius:999px;
+  font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+}
+.sermon-content{display:flex;flex-direction:column;gap:0.7rem}
+.sermon-num{
+  font-family:'Barlow',sans-serif;font-weight:900;font-size:40px;
+  color:var(--border);line-height:1;margin-bottom:1rem;
+}
+.sermon-card:hover .sermon-num{color:rgba(61,18,120,0.15)}
+.sermon-tag{
+  font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:0.7rem;display:block;
+}
+.sermon-title{font-family:'Barlow',sans-serif;font-weight:700;font-size:18px;color:var(--black);line-height:1.25;margin-bottom:0.5rem}
+.sermon-ref{font-size:12px;color:var(--mid-grey);margin-bottom:1.5rem}
+.sermon-play-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:600;color:var(--dark-grey);
+  letter-spacing:0.04em;text-transform:uppercase;
+  text-decoration:none;transition:color 0.2s;
+}
+.sermon-card:hover .sermon-play-btn{color:var(--purple)}
+.play-icon{
+  width:28px;height:28px;border-radius:50%;
+  border:1.5px solid currentColor;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;padding-left:2px;flex-shrink:0;
+}
+ 
+/* EVENTS */
+.events-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.event-list{display:flex;flex-direction:column}
+.event-row{
+  display:flex;align-items:center;gap:2rem;
+  padding:1.5rem 0;
+  border-bottom:1px solid var(--border);
+  transition:all 0.2s;cursor:pointer;
+  flex-wrap:wrap;
+}
+.event-row:first-child{border-top:1px solid var(--border)}
+.event-row:hover{padding-left:1rem;background:var(--bg-soft)}
+.event-date-block{min-width:58px;text-align:center;flex-shrink:0}
+.event-date-block .month{
+  font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.1em;color:var(--gold);display:block;
+}
+.event-date-block .day{
+  font-family:'Barlow',sans-serif;font-weight:900;font-size:34px;
+  color:var(--black);line-height:1;
+}
+.event-divider{width:1px;height:48px;background:var(--border);flex-shrink:0}
+.event-info{flex:1;min-width:150px}
+.event-info h4{font-family:'Barlow',sans-serif;font-weight:700;font-size:18px;color:var(--black);margin-bottom:4px}
+.event-info p{font-size:13px;color:var(--mid-grey)}
+.event-tag{
+  flex-shrink:0;
+  font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--purple);background:var(--purple-light);
+  padding:4px 12px;border-radius:2px;
+}
+.event-arrow{color:var(--light-grey);font-size:18px;flex-shrink:0;transition:color 0.2s,transform 0.2s}
+.event-row:hover .event-arrow{color:var(--purple);transform:translateX(4px)}
+ 
+/* PRAYER */
+.prayer-bg{background:var(--off-black)}
+.prayer-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.prayer-bg .eyebrow{color:var(--gold-bright)}
+.prayer-bg .section-h{color:#fff}
+.prayer-bg .section-body{color:rgba(255,255,255,0.5)}
+.prayer-input{
+  width:100%;background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:3px;padding:12px 16px;
+  font-size:16px;font-family:'Inter',sans-serif;
+  color:#fff;outline:none;transition:border-color 0.2s;
+  margin-bottom:12px;display:block;
+}
+.prayer-input::placeholder{color:rgba(255,255,255,0.3)}
+.prayer-input:focus{border-color:var(--gold)}
+textarea.prayer-input{resize:none}
+.btn-gold-solid{
+  background:var(--gold);color:var(--black);
+  border:none;padding:13px 28px;border-radius:3px;
+  font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;
+  cursor:pointer;transition:background 0.2s;width:100%;
+}
+.btn-gold-solid:hover{background:var(--gold-bright)}
+.prayer-aside{padding-top:1rem}
+.prayer-aside-item{
+  padding:1.5rem 0;border-bottom:1px solid rgba(255,255,255,0.08);
+  display:flex;gap:1rem;align-items:flex-start;
+}
+.prayer-aside-item:first-child{border-top:1px solid rgba(255,255,255,0.08)}
+.p-icon{
+  width:38px;height:38px;flex-shrink:0;border-radius:3px;
+  background:rgba(255,255,255,0.06);
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+.p-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:3px}
+.p-sub{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.5}
+.prayer-success{display:none;text-align:center;padding:3rem 0}
+.prayer-success-icon{font-size:48px;margin-bottom:1rem}
+.prayer-success h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;color:var(--gold-bright);margin-bottom:0.5rem}
+.prayer-success p{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.6}
+ 
+/* CONTACT */
+.contact-bg{background:var(--bg-soft)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-detail-list{margin-top:2rem}
+.contact-detail{
+  display:flex;gap:1.2rem;align-items:flex-start;
+  padding:1.2rem 0;border-bottom:1px solid var(--border);
+}
+.contact-detail:first-child{border-top:1px solid var(--border)}
+.cd-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--mid-grey);margin-bottom:4px}
+.cd-value{font-size:15px;font-weight:500;color:var(--black);word-break:break-word}
+.contact-form .c-input{
+  width:100%;padding:12px 16px;
+  border:1px solid var(--border);border-radius:3px;
+  font-size:16px;font-family:'Inter',sans-serif;
+  color:var(--black);background:var(--bg);
+  outline:none;transition:border-color 0.2s;
+  margin-bottom:12px;display:block;
+}
+.contact-form .c-input:focus{border-color:var(--purple)}
+textarea.c-input{resize:none}
+.contact-form-names{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.btn-dark{
+  background:var(--black);color:#fff;
+  border:none;padding:13px 28px;border-radius:3px;
+  font-size:13px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;
+  cursor:pointer;transition:background 0.2s;width:100%;
+}
+.btn-dark:hover{background:var(--purple)}
+ 
+/* MILESTONE BANNER */
+.milestone{
+  background:var(--gold);
+  padding:2.5rem 2.5rem;
+  display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;
+  text-align:center;
+}
+.milestone-num{
+  font-family:'Barlow',sans-serif;font-weight:900;font-size:80px;
+  color:var(--black);line-height:1;letter-spacing:-0.03em;
+}
+.milestone-text h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:26px;color:var(--black);margin-bottom:4px}
+.milestone-text p{font-size:14px;color:rgba(0,0,0,0.6);font-weight:400}
+ 
+/* FOOTER */
+footer{
+  background:var(--black);
+  padding:3rem 2.5rem 2rem;
+}
+.footer-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:2rem}
+.footer-brand .footer-name{
+  font-family:'Barlow',sans-serif;font-weight:900;font-size:20px;
+  color:#fff;letter-spacing:-0.01em;margin-bottom:4px;
+}
+.footer-brand .footer-tag{font-size:12px;color:rgba(255,255,255,0.3);letter-spacing:0.06em}
+.footer-links-row{display:flex;gap:4rem;flex-wrap:wrap}
+.footer-links-col h5{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1rem}
+.footer-links-col a{display:block;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;margin-bottom:0.6rem;transition:color 0.2s}
+.footer-links-col a:hover{color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.25)}
+.footer-acts{font-size:12px;color:rgba(255,255,255,0.2);font-style:italic}
+ 
+/* ============ RESPONSIVE ============ */
+ 
+/* Tablet */
+@media(max-width:900px){
+  nav{padding:0 1.5rem}
+  .hero{padding:0 1.5rem 4rem}
+  section{padding:70px 1.5rem}
+  .about-grid{gap:3rem}
+  .prayer-grid,.contact-grid{gap:3rem}
+}
+ 
+/* Mobile / tablet-portrait */
+@media(max-width:720px){
+  .about-grid,.prayer-grid,.contact-grid{grid-template-columns:1fr}
+  .sermon-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .footer-top{flex-direction:column}
+  .footer-links-row{gap:2.5rem}
+  .hero{min-height:auto;padding-top:3rem;padding-bottom:3rem}
+  .about-stat-row{flex-wrap:wrap;gap:1.5rem 2rem}
+  .service-bar{gap:0.9rem;flex-direction:column;padding:1.2rem 1.5rem;text-align:center}
+  .service-bar-item{text-align:center}
+  .event-tag{order:3;margin-top:0.5rem;margin-left:74px}
+  .event-row{gap:1rem}
+  .event-divider{display:none}
+  .hero-verse{position:static;margin-top:2.5rem;text-align:left;max-width:none}
+  .hero-slide-dots{position:static;margin-top:1rem}
+  .milestone{padding:2rem 1.5rem;gap:1.5rem}
+  .milestone-num{font-size:56px}
+  .about-visual{aspect-ratio:auto;padding:2.5rem 1.5rem}
+}
+ 
+/* Small phones */
+@media(max-width:480px){
+  nav{padding:0 1rem;height:58px}
+  .nav-logo-name{font-size:13px}
+  .nav-cta{padding:8px 14px;font-size:12px}
+  .hero{padding:0 1.25rem 2.5rem}
+  section{padding:56px 1.25rem}
+  .hero-sub{font-size:14px}
+  .btn-white{width:100%;text-align:center;padding:14px 20px}
+  .hero-actions{flex-direction:column;align-items:stretch;width:100%}
+  .btn-text{justify-content:center}
+  .service-bar-item{font-size:12px}
+  .about-visual-quote{font-size:19px}
+  .stat-num{font-size:32px}
+  .about-stat-row{gap:1.25rem 1.5rem}
+  .sermon-card{padding:1rem}
+  .event-row{padding:1.25rem 0}
+  .event-tag{margin-left:0}
+  .event-date-block{min-width:46px}
+  .event-date-block .day{font-size:28px}
+  .contact-form-names{grid-template-columns:1fr}
+  .milestone-num{font-size:44px}
+  .milestone-text h3{font-size:21px}
+  .footer-links-row{gap:1.75rem;width:100%}
+  .footer-links-col{min-width:110px}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:0.5rem}
+}
+</style>
+</head>
+<body>
+ 
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <div class="nav-logo-icon">
+      <img src="image/logo.png" alt="ICL logo" />
+    </div>
+    <span class="nav-logo-name">In Christ We Live</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#sermons">Sermons</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#prayer">Prayer</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#prayer" class="nav-cta">Submit a Prayer</a>
+</nav>
+ 
+<!-- HERO -->
+<section id="home" class="hero">
+  <!--
+    HERO BACKGROUND SLIDESHOW
+    --------------------------
+    Add as many photos as you like to the slides array below (worship, the
+    building, congregation, outreach, etc). Drop the image files into your
+    "image" folder and update the paths. Recommended: wide landscape photos,
+    at least 1600px wide, so they stay sharp on large screens.
+  -->
+  <div class="hero-slideshow" id="hero-slideshow">
+    <div class="hero-slide is-active" style="background-image:url('Hero/hero1.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Hero/hero2.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Hero/hero3.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Hero/hero4.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Hero/hero5.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Hero/hero7.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Hero/hero8.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Hero/hero9.jpeg')"></div>
+    <div class="hero-slideshow-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-pill"><span class="hero-pill-dot"></span>2026 Theme</div>
+    <p style="font-family:'Barlow',sans-serif;font-weight:300;font-style:italic;font-size:clamp(18px,3vw,28px);color:rgba(255,255,255,0.5);margin-bottom:0.3rem;letter-spacing:0.01em;">The Year of</p>
+    <h1>ELEV<em>A</em>TION</h1>
+    <p class="hero-sub">Transforming minds to manifest the Kingdom of God.</p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-white">Plan Your Visit</a>
+      <a href="#sermons" class="btn-text">Watch Sermons &rarr;</a>
+    </div>
+  </div>
+  <div class="hero-slide-dots" id="hero-slide-dots"></div>
+  <p class="hero-verse">"For in him we live and move and have our being." &mdash; Acts 17:28</p>
+</section>
+ 
+<!-- SERVICE BAR -->
+<div id="services" class="service-bar">
+  <div class="service-bar-item"><span class="service-bar-dot"></span>Sunday 9:00 AM &amp; </div>
+  <div class="service-bar-item"><span class="service-bar-dot"></span>Friday Word & Worship 6:00 PM</div>
+  <div class="service-bar-item"><span class="service-bar-dot"></span>Corner Southward Dr, Indlovu Ave, Winnie Mandela, Thembisa, 1632</div>
+</div>
+ 
+<!-- ABOUT -->
+<section id="about">
+  <div class="inner">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-visual-overlay"></div>
+        <div class="about-visual-content">
+          <span class="about-visual-tag">In Christ We Live &middot; Est. 2016</span>
+          <p class="about-visual-quote">&ldquo;Transforming minds to manifest the Kingdom of God.&rdquo;</p>
+          <span class="about-visual-cite">ICL MINISTRIES VISION</span>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">Who We Are</span>
+        <h2 class="section-h">A Church Called<br/>to Elevate</h2>
+        <p class="section-body">ICL &ndash; In Christ We Live Ministries is a vibrant, Spirit-led church committed to raising up believers, building families, and extending the Kingdom of God across our communities. We believe in the Word, we walk by faith, and we live in Christ.</p>
+        <a href="#contact" class="link-arrow">Find Out More &rarr;</a>
+        <div class="about-stat-row">
+          <div class="stat">
+            <div class="stat-num">10</div>
+            <div class="stat-label">Years of Transformation</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">2+</div>
+            <div class="stat-label">Weekly Services</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">1</div>
+            <div class="stat-label">Family, One Vision</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- 10 YEAR MILESTONE BANNER -->
+<div class="milestone">
+  <div class="milestone-num">10</div>
+  <div class="milestone-text">
+    <h3>Years of God&rsquo;s Faithfulness</h3>
+    <p>Celebrating a decade of transformation &mdash; 2016 to 2026</p>
+  </div>
+</div>
+ 
+<!-- SERMONS -->
+<section id="sermons" class="sermons-bg">
+  <div class="inner">
+    <div class="sermons-header">
+      <div>
+        <span class="eyebrow">Messages</span>
+        <h2 class="section-h">Latest Sermons</h2>
+      </div>
+      <a href="#" class="link-arrow">View All &rarr;</a>
+    </div>
+    <div class="sermon-grid">
+      <div class="sermon-card">
+        <a href="https://youtu.be/bFm70SRiaM8?si=3wo7xxNcXmzu257-" target="_blank" rel="noopener noreferrer" class="sermon-thumbnail">
+          <img src="image/31may.png" alt="Thumbnail for Rising Above Every Limitation" />
+          <span class="sermon-thumb-label">Watch Now</span>
+        </a>
+        <div class="sermon-content">
+          <div class="sermon-num">01</div>
+          <span class="sermon-tag">Kingdom Stewardship Series</span>
+          <h4 class="sermon-title">The Power of Vision</h4>
+          <p class="sermon-ref">May 31, 2026 &middot; Proverbs 29:18</p>
+          <a href="https://youtu.be/bFm70SRiaM8?si=3wo7xxNcXmzu257-" target="_blank" rel="noopener noreferrer" class="sermon-play-btn"><span class="play-icon">&#9654;</span> Watch Now</a>
+        </div>
+      </div>
+      <div class="sermon-card">
+        <a href="https://youtu.be/Um1mekOJxZI?si=N4MnGqyJq6RwAckN" target="_blank" rel="noopener noreferrer" class="sermon-thumbnail">
+          <img src="image/10may.png" alt="Thumbnail for Transformed by the Renewing of Your Mind" />
+          <span class="sermon-thumb-label">Watch Now</span>
+        </a>
+        <div class="sermon-content">
+          <div class="sermon-num">02</div>
+          <span class="sermon-tag">Kingdom Stewardship Series</span>
+          <h4 class="sermon-title">Law of Work, Honour & Contentment</h4>
+          <p class="sermon-ref">May 10, 2026 &middot; Philippians 4:11</p>
+          <a href="https://youtu.be/Um1mekOJxZI?si=N4MnGqyJq6RwAckN" target="_blank" rel="noopener noreferrer" class="sermon-play-btn"><span class="play-icon">&#9654;</span> Watch Now</a>
+        </div>
+      </div>
+      <div class="sermon-card">
+        <a href="https://youtu.be/tW2Grl7jR3s?si=EbrN_4Q5iiHxlDAp" target="_blank" rel="noopener noreferrer" class="sermon-thumbnail">
+          <img src="image/03may.png" alt="Thumbnail for Ten Years of God's Faithfulness" />
+          <span class="sermon-thumb-label">Watch Now</span>
+        </a>
+        <div class="sermon-content">
+          <div class="sermon-num">03</div>
+          <span class="sermon-tag">Kingdom Stewardship Series</span>
+          <h4 class="sermon-title">Your Tongue Produces Life &rsquo;& Death</h4>
+          <p class="sermon-ref">May 03, 2026 &middot; Proverbs 18:21</p>
+          <a href="https://youtu.be/tW2Grl7jR3s?si=EbrN_4Q5iiHxlDAp" target="_blank" rel="noopener noreferrer" class="sermon-play-btn"><span class="play-icon">&#9654;</span> Watch Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- EVENTS -->
+<section id="events">
+  <div class="inner">
+    <div class="events-header">
+      <div>
+        <span class="eyebrow">What&rsquo;s On</span>
+        <h2 class="section-h">Upcoming Events</h2>
+      </div>
+      <a href="#" class="link-arrow">Full Calendar &rarr;</a>
+    </div>
+    <div class="event-list">
+      <div class="event-row">
+        <div class="event-date-block"><span class="month">Jun</span><span class="day">16</span></div>
+        <div class="event-divider"></div>
+        <div class="event-info">
+          <h4>Kingdom Youth Summit</h4>
+          <p>High-energy worship &amp; prayer for teens and young adults</p>
+        </div>
+        <span class="event-tag">Youth</span>
+        <span class="event-arrow">&rarr;</span>
+      </div>
+      <div class="event-row">
+        <div class="event-date-block"><span class="month">Jul</span><span class="day">18</span></div>
+        <div class="event-divider"></div>
+        <div class="event-info">
+          <h4>Community Outreach Day</h4>
+          <p>Serving our neighbourhood &mdash; food parcels, prayer &amp; love in action</p>
+        </div>
+        <span class="event-tag">Outreach</span>
+        <span class="event-arrow">&rarr;</span>
+      </div>
+      <div class="event-row">
+        <div class="event-date-block"><span class="month">Aug</span><span class="day">10</span></div>
+        <div class="event-divider"></div>
+        <div class="event-info">
+          <h4>Ladies&rsquo; Women's Conference </h4>
+          <p>Testimony, worship, and connection for all women of the church</p>
+        </div>
+        <span class="event-tag">Women</span>
+        <span class="event-arrow">&rarr;</span>
+      </div>
+      <div class="event-row">
+        <div class="event-date-block"><span class="month">Nov</span><span class="day">9</span></div>
+        <div class="event-divider"></div>
+        <div class="event-info">
+          <h4>10th Anniversary Celebration Service</h4>
+          <p>A landmark service &mdash; a decade of transformation together</p>
+        </div>
+        <span class="event-tag">&#127885; Milestone</span>
+        <span class="event-arrow">&rarr;</span>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- PRAYER -->
+<section id="prayer" class="prayer-bg">
+  <div class="inner">
+    <div class="prayer-grid">
+      <div>
+        <span class="eyebrow">Prayer Requests</span>
+        <h2 class="section-h">We&rsquo;re Standing<br/>With You</h2>
+        <p class="section-body">You don&rsquo;t have to carry it alone. Share your request and our prayer team will intercede on your behalf.</p>
+        <div class="prayer-aside">
+          <div class="prayer-aside-item">
+            <div class="p-icon">&#10013;</div>
+            <div><p class="p-title">Prayer Team</p><p class="p-sub">Dedicated intercessors pray over every request submitted.</p></div>
+          </div>
+          <div class="prayer-aside-item">
+            <div class="p-icon">&#128591;</div>
+            <div><p class="p-title">Confidential</p><p class="p-sub">Your request is handled with care, love, and respect.</p></div>
+          </div>
+          <div class="prayer-aside-item">
+            <div class="p-icon">&#128155;</div>
+            <div><p class="p-title">God Is Faithful</p><p class="p-sub">We believe in a God who hears and answers prayer.</p></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <form id="prayer-form">
+          <input type="hidden" name="_subject" value="New Prayer Request from ICL Website"/>
+          <input class="prayer-input" type="text" id="prayer-name" name="name" placeholder="Your name (optional)"/>
+          <input class="prayer-input" type="email" id="prayer-email" name="email" placeholder="Email address (optional)"/>
+          <textarea class="prayer-input" rows="6" id="prayer-text" name="message" placeholder="Share your prayer request here..."></textarea>
+          <button class="btn-gold-solid" type="submit">Send My Request</button>
+        </form>
+        <div class="prayer-success" id="prayer-thanks">
+          <div class="prayer-success-icon">&#128591;</div>
+          <h3>Request Received</h3>
+          <p>Our team will lift you up in prayer.<br/>You are seen, you are loved, and God is faithful.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CONTACT -->
+<section id="contact" class="contact-bg">
+  <div class="inner">
+    <div class="contact-grid">
+      <div>
+        <span class="eyebrow">Contact Us</span>
+        <h2 class="section-h">We&rsquo;d Love to<br/>Hear From You</h2>
+        <p class="section-body">Whether you&rsquo;re visiting for the first time or want to connect deeper, we&rsquo;re here.</p>
+        <div class="contact-detail-list">
+          <div class="contact-detail">
+            <div><div class="cd-label">Address</div><div class="cd-value">Corner Southward Dr, Indlovu Ave,Johannesburg, South Africa</div></div>
+          </div>
+          <div class="contact-detail">
+            <div><div class="cd-label">Phone</div><div class="cd-value">+27 68 689 4627</div></div>
+          </div>
+          <div class="contact-detail">
+            <div><div class="cd-label">Email</div><div class="cd-value">smmotsholane@gmail.com</div></div>
+          </div>
+          <div class="contact-detail">
+            <div><div class="cd-label">Office Hours</div><div class="cd-value">Wednesday &ndash; Friday &ndash; Sunday </div></div>
+          </div>
+          <div class="contact-detail">
+            <div><div class="cd-label">Facebook</div><div class="cd-value">In Christ We Live Ministries</div></div>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" id="contact-form">
+        <input type="hidden" name="_subject" value="New Contact Enquiry from ICL Website"/>
+        <div class="contact-form-names">
+          <input class="c-input" type="text" name="first_name" placeholder="First name"/>
+          <input class="c-input" type="text" name="last_name" placeholder="Last name"/>
+        </div>
+        <input class="c-input" type="email" name="email" placeholder="Email address"/>
+        <input class="c-input" type="text" name="subject" placeholder="Subject"/>
+        <textarea class="c-input" rows="5" name="message" placeholder="Your message..."></textarea>
+        <button class="btn-dark" type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-name">In Christ We Live Ministries</div>
+      <div class="footer-tag">Johannesburg, South Africa &middot; Est. 2016</div>
+    </div>
+    <div class="footer-links-row">
+      <div class="footer-links-col">
+        <h5>Church</h5>
+        <a href="#about">About Us</a>
+        <a href="#services">Service Times</a>
+        <a href="#sermons">Sermons</a>
+        <a href="#events">Events</a>
+      </div>
+      <div class="footer-links-col">
+        <h5>Connect</h5>
+        <a href="#prayer">Prayer Request</a>
+        <a href="#contact">Contact</a>
+        <a href="https://www.facebook.com/kingdomlife2016/">Facebook</a>
+        <a href="https://youtube.com/@inchristweliveministry?si=U5DH6i1lnKI7Vq-5">YouTube</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 ICL &ndash; In Christ We Live Ministries. All rights reserved.</span>
+    <span class="footer-acts">&ldquo;For in him we live and move and have our being.&rdquo; &mdash; Acts 17:28</span>
+  </div>
+</footer>
+ 
+<script>
+document.querySelectorAll('.event-row,.sermon-card').forEach(function(el){
+  el.setAttribute('role','button');
+  el.setAttribute('tabindex','0');
+});
+ 
+/* HERO BACKGROUND SLIDESHOW */
+(function () {
+  var slideshow = document.getElementById('hero-slideshow');
+  if (!slideshow) return;
+  var slides = Array.prototype.slice.call(slideshow.querySelectorAll('.hero-slide'));
+  var dotsWrap = document.getElementById('hero-slide-dots');
+  var current = 0;
+  var intervalMs = 6000;
+  var timer;
+ 
+  if (slides.length > 1 && dotsWrap) {
+    slides.forEach(function (_, i) {
+      var dot = document.createElement('button');
+      dot.className = 'hero-slide-dot' + (i === 0 ? ' is-active' : '');
+      dot.setAttribute('aria-label', 'Show slide ' + (i + 1));
+      dot.addEventListener('click', function () { goToSlide(i); resetTimer(); });
+      dotsWrap.appendChild(dot);
+    });
+  }
+ 
+  function updateDots() {
+    if (!dotsWrap) return;
+    Array.prototype.forEach.call(dotsWrap.children, function (dot, i) {
+      dot.classList.toggle('is-active', i === current);
+    });
+  }
+ 
+  function goToSlide(index) {
+    slides[current].classList.remove('is-active');
+    current = index;
+    slides[current].classList.add('is-active');
+    updateDots();
+  }
+ 
+  function nextSlide() {
+    goToSlide((current + 1) % slides.length);
+  }
+ 
+  function resetTimer() {
+    if (timer) clearInterval(timer);
+    if (slides.length > 1) timer = setInterval(nextSlide, intervalMs);
+  }
+ 
+  resetTimer();
+})();
+ 
+/*
+  FORMSPREE SETUP
+  ----------------
+  1. Go to https://formspree.io and sign up free (50 submissions/month on the free plan).
+  2. Create a form for the church (you can use ONE form for both Prayer + Contact —
+     the hidden "_subject" field already tells you which one came in — or create
+     two separate forms if you'd rather they land in different Formspree inboxes).
+  3. Formspree gives you a form ID that looks like "mzzngyoa" (part of a URL like
+     https://formspree.io/f/mzzngyoa).
+  4. Replace PRAYER_FORM_ID and CONTACT_FORM_ID below with your real ID(s).
+  5. Formspree emails go to whatever address you verified when creating the form —
+     make sure that's smmotsholane@gmail.com (or update it there).
+*/
+var PRAYER_FORM_ID = 'xjyvzjny';
+var CONTACT_FORM_ID = 'xjyvzjny';
+ 
+function sendFormToChurch(formId, formspreeId, successElId) {
+  var form = document.getElementById(formId);
+  if (!form) return;
+ 
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+ 
+    var formData = new FormData(form);
+ 
+    fetch('https://formspree.io/f/' + formspreeId, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function (response) {
+      if (response.ok) {
+        form.style.display = 'none';
+        var successEl = document.getElementById(successElId);
+        if (successEl) successEl.style.display = 'block';
+        form.reset();
+      } else {
+        return response.json().then(function (data) {
+          var message = (data && data.errors)
+            ? data.errors.map(function (e) { return e.message; }).join(', ')
+            : 'Submission failed';
+          throw new Error(message);
+        });
+      }
+    })
+    .catch(function () {
+      alert('There was a problem sending your message. Please email smmotsholane@gmail.com directly.');
+    });
+  });
+}
+ 
+sendFormToChurch('prayer-form', PRAYER_FORM_ID, 'prayer-thanks');
+sendFormToChurch('contact-form', CONTACT_FORM_ID, null);
+</script>
+</body>
+</html>
+ 
